@@ -46,6 +46,10 @@
 	 * ratio	= used only if "png" format is used. the default (and minimum) value is 2. it represent the number of times the skin will be enlarged
 	 */
 	error_reporting(E_ERROR);
+	
+	$seconds_to_cache = 60*60*24*7;//duration of the cache sent to the browser
+	
+	
 	function microtime_float()
 	{
 		list($usec, $sec) = explode(" ", microtime());
@@ -57,6 +61,10 @@
 		$imgPng = imageCreateFromPng('tmp.png');
 	else
 		$imgPng = imageCreateFromPng('http://s3.amazonaws.com/MinecraftSkins/'.$login.'.png');
+	
+	if(!$imgPng)
+        	$imgPng = imageCreateFromPng('tmp.png');
+        
 	imageAlphaBlending($imgPng, true);
 	imageSaveAlpha($imgPng, true);
 	
@@ -1049,6 +1057,16 @@
 	$ratio = intval($_GET['ratio']);
 	if($ratio < 2)
 		$ratio = 2;
+	
+	
+	//cache
+	//$seconds_to_cache = 60*60*24*7;//see at the begining of the file
+	if($seconds_to_cache > 0) {
+		$ts = gmdate("D, d M Y H:i:s", time() + $seconds_to_cache) . ' GMT';
+		header('Expires: ' . $ts);
+		header('Pragma: cache');
+		header('Cache-Control: max-age=' . $seconds_to_cache);
+	}
 	
 	if($_GET['format']=='svg')
 	{
