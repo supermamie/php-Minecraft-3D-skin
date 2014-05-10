@@ -68,11 +68,15 @@
 	imageAlphaBlending($imgPng, true);
 	imageSaveAlpha($imgPng, true);
 	
-	$width = imagesx($imgPng);
+	/* $width = imagesx($imgPng);
 	$height = imagesy($imgPng);
 	
 	if(!($width == $height*2) || $height%32 != 0)//bad ratio !
-		$imgPng = imageCreateFromPng($fallBack_image);
+		$imgPng = imageCreateFromPng($fallBack_image); */
+		
+	//A quick fix, not perfect, to add compatibility with the new 1.8 Minecraft skin format
+	$width = 64;
+	$height = 32;
 	
 	$hdRatio = $height/32;//$hdRatio = 2 if skin is 128*64
 	
