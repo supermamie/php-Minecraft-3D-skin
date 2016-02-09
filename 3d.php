@@ -60,7 +60,7 @@
 	if(trim($login) == '')
 		$imgPng = imageCreateFromPng($fallBack_image);
 	else
-		$imgPng = imageCreateFromPng('http://s3.amazonaws.com/MinecraftSkins/'.$login.'.png');
+		$imgPng = imageCreateFromPng('http://skins.minecraft.net/MinecraftSkins/'.$login.'.png');//Change Skin Url
 	
 	if(!$imgPng)
         	$imgPng = imageCreateFromPng($fallBack_image);
@@ -68,15 +68,28 @@
 	imageAlphaBlending($imgPng, true);
 	imageSaveAlpha($imgPng, true);
 	
-	/* $width = imagesx($imgPng);
+	$width = imagesx($imgPng);
 	$height = imagesy($imgPng);
 	
-	if(!($width == $height*2) || $height%32 != 0)//bad ratio !
-		$imgPng = imageCreateFromPng($fallBack_image); */
-		
+	if($height%32!=0){//Bad Ratio
+		$imgPng = imageCreateFromPng($fallBack_image);
+	}else{
+		if($width != $height*2){//Check if not 1.8- Skin Format
+			if($width == $height){//1.8 Format
+				$height/=2;//Quick Fix
+			}else{//Neither 1.8 nor 1.8-
+				$imgPng = imageCreateFromPng($fallBack_image);
+			}
+		}
+	}
+	/*
 	//A quick fix, not perfect, to add compatibility with the new 1.8 Minecraft skin format
 	$width = 64;
-	$height = 32;
+	$height = 32;*/
+	
+	//get Height/Weight Again (May use fallBack)
+	$width = imagesx($imgPng);
+	$height = imagesy($imgPng);
 	
 	$hdRatio = $height/32;//$hdRatio = 2 if skin is 128*64
 	
