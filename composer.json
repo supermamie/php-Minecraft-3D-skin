@@ -13,6 +13,6 @@
 	},
 	"autoload":
 	{
-		"psr-4": { "supermamie\\": "src" }
+		"psr-4": { "supermamie\\": "" }
 	}
 }
