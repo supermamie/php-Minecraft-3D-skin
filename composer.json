@@ -1,0 +1,7 @@
+{
+    "name": "supermamie/php-minecraft-3d-skin",
+    "description": "Render 3D minecraft skins",
+    "require": {
+        "php": ">=7.4",
+    }
+}
