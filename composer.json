@@ -1,7 +1,18 @@
+
 {
-    "name": "supermamie/php-minecraft-3d-skin",
+	"name": "supermamie/php-minecraft-3d-skin",
     "description": "Render 3D minecraft skins",
-    "require": {
-        "php": ">=7.4"
-    }
+	"license": "MIT",
+	"keywords":
+	[
+		"minecraft"
+	],
+	"require":
+	{
+		"php": ">=7.0"
+	},
+	"autoload":
+	{
+		"psr-4": { "supermamie\\": "src" }
+	}
 }
